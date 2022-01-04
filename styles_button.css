@@ -5,7 +5,9 @@
   --button-after-animation-time: 4s;
   --button-animation-after-round-animation-time: 1s;
   --check-mark-background-color: rgb(36, 171, 171);
+  --cross-mark-background-color: rgb(255, 23, 23);
   --button-done-animation-time: 1s;
+  --button-done-after-animation-time: 500ms;
   box-sizing: border-box;
 }
 
@@ -34,11 +36,49 @@ body {
 }
 
 .button-done-animation {
+  position: relative;
   animation: button-done-animation var(--button-done-animation-time) ease-in-out;
   animation-fill-mode: forwards;
 }
 
+.button-done-animation::after {
+  position: absolute;
+  font-size: 1.5rem;
+  text-align: center;
+  text-justify: center;
+  top: 15%;
+  right: 15%;
+  bottom: 15%;
+  left: 15%;
+  width: 70%;
+  height: 70%;
+
+  content: "✓";
+  animation: button-done-after-animation var(--button-done-after-animation-time)
+    linear var(--button-done-animation-time) forwards;
+}
 .button-error-animation {
+  position: relative;
+  animation: button-error-animation var(--button-done-animation-time)
+    ease-in-out;
+  animation-fill-mode: forwards;
+}
+
+.button-error-animation::after {
+  position: absolute;
+  font-size: 2rem;
+  text-align: center;
+  text-justify: center;
+  top: 15%;
+  right: 15%;
+  bottom: 15%;
+  left: 15%;
+  width: 70%;
+  height: 70%;
+  content: "⨯";
+  animation: button-error-after-animation
+    var(--button-done-after-animation-time) linear
+    var(--button-done-animation-time) forwards;
 }
 
 @keyframes buttonAnimationSrink {
@@ -62,9 +102,9 @@ body {
   top: 0;
   bottom: 0;
   left: 35%;
+  content: " ";
   right: 35%;
   border-radius: 0.5em;
-  content: "✓";
   font-size: 2rem;
   text-align: center;
 
@@ -136,13 +176,50 @@ body {
 
 @keyframes button-done-animation {
   0% {
+    color: transparent;
   }
 
   100% {
     background-color: var(--check-mark-background-color);
     color: transparent;
+    padding: 0;
+    margin: 0;
     border-radius: 100%;
     width: 4em;
     height: 4em;
+  }
+}
+
+@keyframes button-done-after-animation {
+  0% {
+    color: transparent;
+  }
+  100% {
+    color: white;
+  }
+}
+
+@keyframes button-error-animation {
+  0% {
+    color: transparent;
+  }
+
+  100% {
+    background-color: var(--cross-mark-background-color);
+    color: transparent;
+    padding: 0;
+    margin: 0;
+    border-radius: 100%;
+    width: 4em;
+    height: 4em;
+  }
+}
+
+@keyframes button-error-after-animation {
+  0% {
+    color: transparent;
+  }
+  100% {
+    color: white;
   }
 }
