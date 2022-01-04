@@ -1,0 +1,148 @@
+:root {
+  --background-color: #444242;
+  --button-background-color: black;
+  --button-srink-animation-time: 500ms;
+  --button-after-animation-time: 4s;
+  --button-animation-after-round-animation-time: 1s;
+  --check-mark-background-color: rgb(36, 171, 171);
+  --button-done-animation-time: 1s;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--background-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn {
+  position: relative;
+  border-radius: 0.25em;
+  border: none;
+  color: var(--check-mark-background-color);
+  font-weight: bold;
+  background-color: var(--button-background-color);
+  padding: 1.5em 2.5em;
+}
+
+.button-animation {
+  animation: buttonAnimationSrink var(--button-srink-animation-time) linear;
+  animation-fill-mode: forwards;
+}
+
+.button-done-animation {
+  animation: button-done-animation var(--button-done-animation-time) ease-in-out;
+  animation-fill-mode: forwards;
+}
+
+.button-error-animation {
+}
+
+@keyframes buttonAnimationSrink {
+  0% {
+    color: transparent;
+    user-select: none;
+  }
+  50% {
+  }
+
+  100% {
+    color: transparent;
+    user-select: none;
+    padding: 0em 5.5em;
+    height: 0.6em;
+  }
+}
+.button-animation::after {
+  position: absolute;
+  background-color: transparent;
+  top: 0;
+  bottom: 0;
+  left: 35%;
+  right: 35%;
+  border-radius: 0.5em;
+  content: "✓";
+  font-size: 2rem;
+  text-align: center;
+
+  animation: button-after-animation-start var(--button-srink-animation-time)
+      linear,
+    button-after-animation-starting-from-middle
+      calc(var(--button-after-animation-time) / 2) linear
+      var(--button-srink-animation-time) infinite;
+  animation-fill-mode: forwards;
+}
+
+@keyframes button-after-animation-start {
+  0% {
+    background-color: transparent;
+  }
+  100% {
+    background-color: gray;
+  }
+}
+
+@keyframes button-after-animation-starting-from-left {
+  20% {
+    width: 40%;
+    left: 0;
+  }
+  50% {
+    left: 70%;
+    width: 30%;
+  }
+  70% {
+    width: 40%;
+    left: 60%;
+  }
+  80% {
+  }
+  100% {
+    left: 0%;
+    width: 30%;
+  }
+}
+
+@keyframes button-after-animation-starting-from-middle {
+  0% {
+    left: 35%;
+    right: 35%;
+  }
+  18.75% {
+    left: 0%;
+    right: 60%;
+  }
+  31.25% {
+    left: 0%;
+    right: 70%;
+  }
+
+  68.75% {
+    left: 60%;
+    right: 0%;
+  }
+  81.25% {
+    left: 70%;
+    right: 0%;
+  }
+  100% {
+    left: 35%;
+    right: 35%;
+  }
+}
+
+@keyframes button-done-animation {
+  0% {
+  }
+
+  100% {
+    background-color: var(--check-mark-background-color);
+    color: transparent;
+    border-radius: 100%;
+    width: 4em;
+    height: 4em;
+  }
+}
